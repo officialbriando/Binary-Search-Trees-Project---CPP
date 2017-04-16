@@ -4,15 +4,34 @@
 using namespace std;
 
 Faculty::Faculty(){
-	cout << "ID: ";		cin >> id;
-	cout << "Name: ";	cin >> name;
-	cout << "Level: ";	cin >> level;
-	cout << "Department: ";	cin >> dept;
 	studentNum = 0;
 }
 
 Faculty::~Faculty(){
 	
+}
+
+void Faculty::initFac(){
+	cout << "ID: ";		cin >> id;
+	cout << "Name: ";	cin >> name;
+	cout << "Level: ";	cin >> level;
+	cout << "Department: ";	cin >> dept;	
+}
+
+void Faculty::setId(int myId){
+	id = myId;
+}
+
+void Faculty::setName(string myName){
+	name = myName;
+}
+
+void Faculty::setLevel(string myLevel){
+	level = myLevel;
+}
+
+void Faculty::setDept(string myDept){
+	dept = myDept;
 }
 
 int Faculty::getId(){
@@ -80,4 +99,3 @@ void Faculty::serialize(ofstream& file){
 	file << getDept() << endl;
 	for(int i = 0; i < studentNum; ++i) file << getStudent(i) << endl;
 }
-
