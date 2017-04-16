@@ -35,7 +35,7 @@ void Student::setMajor(string myMajor){
 	major = myMajor;
 }
 
-int Student::setAdvisor(int myAdv){
+void Student::setAdvisor(int myAdv){
 	advisor = myAdv;
 }
 
