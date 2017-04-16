@@ -10,6 +10,7 @@ class TreeNode
 	TreeNode(E data);
 	~TreeNode();
 
+	int key;
 	E element;
 
 	TreeNode* left;				//Pointers to left and right child nodes.
@@ -24,12 +25,14 @@ TreeNode<E>::TreeNode()			//Default constructor initializes both pointers to NUL
 }
 
 template<class E>
-TreeNode<E>::TreeNode(E data)	//Constructor initializes both pointers to NULL.
+TreeNode<E>::TreeNode(E data, int k)	//Constructor initializes both pointers to NULL.
 {								//Sets data argument to the element of the node.
 	left = NULL;	
 	right = NULL;
 
 	element = data;
+	key = k;
+
 }
 
 template<class E>
