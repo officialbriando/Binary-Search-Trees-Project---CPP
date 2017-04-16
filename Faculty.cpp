@@ -80,3 +80,4 @@ void Faculty::serialize(ofstream& file){
 	file << getDept() << endl;
 	for(int i = 0; i < studentNum; ++i) file << getStudent(i) << endl;
 }
+
