@@ -12,6 +12,12 @@ public:
 	Faculty();
 	~Faculty();
 	
+	void initFac();
+	void setId(int myId);
+	void setName(string myName);
+	void setLevel(string myLevel);
+	void setDept(string myDept);
+	
 	int getId();
 	string getName();
 	string getLevel();
