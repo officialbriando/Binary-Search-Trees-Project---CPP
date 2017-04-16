@@ -5,8 +5,8 @@ private:
 	string name;
 	string level;
 	string dept;
-	int students[10] = {0};
 	int studentNum;
+	int students[10] = {0};
 	
 public:
 	Faculty();
@@ -22,4 +22,5 @@ public:
 	void removeStudent(int id);
 	bool isEqual(Faculty n);
 	bool isLesser(Faculty n);
+	void serialize(ofstream& file);
 };
