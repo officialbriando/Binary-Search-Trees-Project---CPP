@@ -8,7 +8,7 @@ Student::Student(){
 	cout << "Name: ";	cin >> name;
 	cout << "Level: ";	cin >> level;
 	cout << "Major: ";	cin >> major;
-	cout << "Advisor: ";cin >> advisor;
+	cout << "Advisor ID: ";cin >> advisor;
 }
 
 Student::~Student(){
@@ -47,4 +47,12 @@ bool Student::isLesser(Student n){
 	int y = n.getId();
 	if(x<y) return true;
 	else return false;
+}
+
+void Student::serialize(ofstream& file){	//take contents and out to file
+	file << getId() << endl;				//file should contain all students
+	file << getName() << endl;
+	file << getLevel() << endl;
+	file << getMajor() << endl;
+	file << getAdvisor() << endl;
 }
