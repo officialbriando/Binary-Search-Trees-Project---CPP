@@ -4,15 +4,39 @@
 using namespace std;
 
 Student::Student(){
-	cout << "ID: ";		cin >> id;
-	cout << "Name: ";	cin >> name;
-	cout << "Level: ";	cin >> level;
-	cout << "Major: ";	cin >> major;
-	cout << "Advisor ID: ";cin >> advisor;
+
 }
 
 Student::~Student(){
 	
+}
+
+void Student::initStud(){
+	cout << "ID: ";		cin >> id;
+	cout << "Name: ";	cin >> name;
+	cout << "Level: ";	cin >> level;
+	cout << "Major: ";	cin >> major;
+	cout << "Advisor ID: ";	cin >> advisor;	
+}
+
+void Student::setId(int myId){
+	id = myId;
+}
+
+void Student::setName(string myName){
+	name = myName;
+}
+
+void Student::setLevel(string myLevel){
+	level = myLevel;
+}
+
+void Student::setMajor(string myMajor){
+	major = myMajor;
+}
+
+int Student::setAdvisor(int myAdv){
+	advisor = myAdv;
 }
 
 int Student::getId(){
