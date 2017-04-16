@@ -72,3 +72,11 @@ bool Faculty::isLesser(Faculty n){
 	if(x<y) return true;
 	else return false;
 }
+
+void Faculty::serialize(ofstream& file){
+	file << getId() << endl;
+	file << getName() << endl;
+	file << getLevel() << endl;
+	file << getDept() << endl;
+	for(int i = 0; i < studentNum; ++i) file << getStudent(i) << endl;
+}
