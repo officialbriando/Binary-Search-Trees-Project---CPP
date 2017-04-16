@@ -11,6 +11,13 @@ public:
 	Student();
 	~Student();
 	
+	void initStud();
+	void setId(int myId);
+	void setName(string myName);
+	void setLevel(string myLevel);
+	void setMajor(string myMajor);
+	void setAdvisor(int myAdv);
+	
 	int getId();
 	string getName();
 	string getLevel();
