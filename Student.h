@@ -19,4 +19,5 @@ public:
 	
 	bool isEqual(Student n);
 	bool isLesser(Student n);
+	void serialize(ofstream& file);
 };
