@@ -6,15 +6,16 @@ template<class E>				//Creating a template class of data type E.
 
 class TreeNode
 {
-	TreeNode();
-	TreeNode(E data);
-	~TreeNode();
+	public:
+		TreeNode();
+		TreeNode(E data, int k);
+		~TreeNode();
 
-	int key;
-	E element;
+		int key;
+		E element;
 
-	TreeNode* left;				//Pointers to left and right child nodes.
-	TreeNode* right;
+		TreeNode* left;				//Pointers to left and right child nodes.
+		TreeNode* right;
 };
 
 template<class E>
