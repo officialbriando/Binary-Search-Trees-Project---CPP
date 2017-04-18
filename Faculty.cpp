@@ -1,10 +1,12 @@
 #include <iostream>
 #include <string>
+#include <fstream>
 #include "Faculty.h"
 using namespace std;
 
 Faculty::Faculty(){
 	studentNum = 0;
+	students = new int[5];
 }
 
 Faculty::~Faculty(){
@@ -55,7 +57,7 @@ int Faculty::getStudent(int n){
 }
 
 void Faculty::addStudent(int id){
-	if(studentNum >=10) cout << "Cannot hold anymore students.\n";
+	if(studentNum >=5) cout << "Cannot hold anymore students.\n";
 	else{
 		for(int i=0; i < studentNum; ++i){
 			if(students[i] == 0) students[i] = id;
@@ -92,7 +94,7 @@ bool Faculty::isLesser(Faculty n){
 	else return false;
 }
 
-void Faculty::serialize(ofstream& file){
+void Faculty::serialize(std::ofstream& file){
 	file << getId() << endl;
 	file << getName() << endl;
 	file << getLevel() << endl;
