@@ -10,10 +10,12 @@ template <class E>				//Creating a template class of data type E.
 class BSTree
 {
 	private:
-		TreeNode root;
+		TreeNode<E> *root;
 	public:
 		BSTree();
 		~BSTree();
+
+		int size;
 
 		void insert(E data, int k);
 		bool contains(int k);
@@ -23,17 +25,20 @@ class BSTree
 		E getMin();
 		E getMax();
 
-		void printInOrder();
-		void printPostOrder();
-		void printPreOrder();
+		void printInOrder(TreeNode<E> *n);
+		void printPostOrder(TreeNode<E> *n);
+		void printPreOrder(TreeNode<E> *n);
 
-		TreeNode getSuccessor(TreeNode n);		//Helper function for delete method.
+		TreeNode<E>* getSuccessor(TreeNode<E> *n);	//Helper function for delete method.
+		TreeNode<E>* getRoot();
+		int getSize();
 };
 
 template<class E>
 BSTree<E>::BSTree()
 {
 	root = NULL;
+	size = 0;
 }
 
 template<class E>
@@ -45,11 +50,12 @@ BSTree<E>::~BSTree()
 template<class E>
 E BSTree<E>::getMax()
 {
-	TreeNode *current = root;
+	TreeNode<E> *current = root;
 
 	if(root == NULL)
 	{
-		return NULL;
+		cout << "The tree is empty." << endl;
+		return 0;
 	}
 	else
 	{
@@ -58,18 +64,19 @@ E BSTree<E>::getMax()
 			current = current->right;
 		}
 
-		return &(current->element);
+		return current->element;
 	}
 }
 
 template<class E>
 E BSTree<E>::getMin()
 {
-	TreeNode *current = root;
+	TreeNode<E> *current = root;
 
 	if(root == NULL)
 	{
-		return NULL;
+		cout << "The tree is empty." << endl;
+		return 0;
 	}
 	else
 	{
@@ -78,14 +85,14 @@ E BSTree<E>::getMin()
 			current = current->left;
 		}
 
-		return &(current->element);
+		return current->element;
 	}
 }
 
 template<class E>
 void BSTree<E>::insert(E data, int k)
 {
-	TreeNode *node = new TreeNode(data, k);
+	TreeNode<E> *node = new TreeNode<E>(data, k);
 
 	if(root == NULL) //If tree is empty
 	{
@@ -93,8 +100,8 @@ void BSTree<E>::insert(E data, int k)
 	}
 	else
 	{
-		TreeNode *current = root;	//Initialize current node to root
-		TreeNode *parent = NULL;
+		TreeNode<E> *current = root;	//Initialize current node to root
+		TreeNode<E> *parent = NULL;
 
 		while(true)
 		{
@@ -120,6 +127,8 @@ void BSTree<E>::insert(E data, int k)
 			}
 		}
 	}
+
+	size++;
 }
 
 template<class E>
@@ -132,7 +141,7 @@ bool BSTree<E>::contains(int k)
 	}
 	else
 	{
-		TreeNode *current = root;	//Start at root
+		TreeNode<E> *current = root;	//Start at root
 
 		while(current->key != k)
 		{
@@ -165,8 +174,8 @@ bool BSTree<E>::deleteNode(int k)
 		return false;
 	}
 
-	TreeNode *current = root;	//Always start at root for current
-	TreeNode *parent = NULL;	//No initial parents
+	TreeNode<E> *current = root;	//Always start at root for current
+	TreeNode<E> *parent = NULL;	//No initial parents
 	bool isLeft = true;
 
 	while(current->key != k)
@@ -175,7 +184,7 @@ bool BSTree<E>::deleteNode(int k)
 
 		if(k < current->key)
 		{
-			ifLeft = true;
+			isLeft = true;
 			current = current->left;
 		}
 		else if(k > current->key)
@@ -194,7 +203,7 @@ bool BSTree<E>::deleteNode(int k)
 	//NO CHILDREN
 	if(current->left == NULL && current->right == NULL)
 	{
-		if(currrent == root)
+		if(current == root)
 		{
 			root == NULL;
 		}
@@ -243,7 +252,7 @@ bool BSTree<E>::deleteNode(int k)
 	//TWO CHILDREN
 	else if(current->left != NULL && current->right != NULL)
 	{
-		TreeNode *successor = getSuccessor(current);
+		TreeNode<E> *successor = getSuccessor(current);
 
 		if(current == root)
 		{
@@ -261,16 +270,17 @@ bool BSTree<E>::deleteNode(int k)
 		successor->left = current->left;
 	}
 
+	size--;
 	return true;
 }
 
 
 template<class E>
-TreeNode BSTree<E>::getSuccessor(TreeNode *n)
+TreeNode<E>* BSTree<E>::getSuccessor(TreeNode<E> *n)
 {
-	TreeNode *successor_parent = n;
-	TreeNode *successor = n; //Will be one right, all the way left.
-	TreeNode *current = n->right;
+	TreeNode<E> *successor_parent = n;
+	TreeNode<E> *successor = n; //Will be one right, all the way left.
+	TreeNode<E> *current = n->right;
 
 	while(current != NULL)
 	{
@@ -289,36 +299,55 @@ TreeNode BSTree<E>::getSuccessor(TreeNode *n)
 }
 
 template<class E>
-void BSTree<E>::printInOrder(TreeNode n)	//Should use root as argument.
+void BSTree<E>::printInOrder(TreeNode<E> *n)	//Should use getRoot as argument.
 {
 	if(n != NULL)
 	{
 		printInOrder(n -> left);
-		cout << n->element;
+		cout << n->element << endl;
 		printInOrder(n -> right);
 	}
 }
 
 template<class E>
-void BSTree<E>::printPostOrder(TreeNode n)	//Should use root as argument.
+void BSTree<E>::printPostOrder(TreeNode<E> *n)	//Should use getRoot as argument.
 {
 	if(n != NULL)
 	{
 		printPostOrder(n -> left);
 		printInOrder(n -> right);
 
-		cout << n->element;
+		cout << n->element << endl;
 	}
 }
 
 template<class E>
-void BSTree<E>::printPreOrder(TreeNode n)	//Should use root as argument.
+void BSTree<E>::printPreOrder(TreeNode<E> *n)	//Should use getRoot as argument.
 {
 	if(n != NULL)
 	{
-		cout << n->element;
+		cout << n->element << endl;
 
 		printPostOrder(n -> left);
 		printInOrder(n -> right);
 	}
+}
+
+template<class E>
+TreeNode<E>* BSTree<E>::getRoot()
+{
+	if(root != NULL)
+	{
+		return root;
+	}
+	else
+	{
+		return 0;
+	}
+}
+
+template<class E>
+int BSTree<E>::getSize()		//To be used with getRoot() method.
+{
+	return size;
 }
