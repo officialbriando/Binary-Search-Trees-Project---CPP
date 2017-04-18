@@ -6,7 +6,7 @@ private:
 	string level;
 	string dept;
 	int studentNum;
-	int students[10] = {0};
+	int *students;
 	
 public:
 	Faculty();
