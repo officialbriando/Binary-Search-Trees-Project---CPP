@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <fstream>
 #include "Student.h"
 using namespace std;
 
@@ -73,7 +74,7 @@ bool Student::isLesser(Student n){
 	else return false;
 }
 
-void Student::serialize(ofstream& file){	//take contents and out to file
+void Student::serialize(std::ofstream& file){	//take contents and out to file
 	file << getId() << endl;				//file should contain all students
 	file << getName() << endl;
 	file << getLevel() << endl;
