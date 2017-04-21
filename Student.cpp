@@ -40,6 +40,14 @@ void Student::setAdvisor(int myAdv){
 	advisor = myAdv;
 }
 
+void Student::printRecord(){
+	cout << "Student ID: " << getId() << endl;
+	cout << "Name: " << getName() << endl;
+	cout << "Current Level: " << getLevel() << endl;
+	cout << "Major: " << getMajor() << endl;
+	Cout << "Advisor: " << getAdvisor() << endl;
+}
+
 int Student::getId(){
 	return id;
 }
