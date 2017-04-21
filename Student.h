@@ -18,6 +18,7 @@ public:
 	void setMajor(string myMajor);
 	void setAdvisor(int myAdv);
 	
+	void printRecord();
 	int getId();
 	string getName();
 	string getLevel();
