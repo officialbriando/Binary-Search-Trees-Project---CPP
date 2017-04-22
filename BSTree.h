@@ -19,6 +19,7 @@ class BSTree
 
 		void insert(E data, int k);
 		bool contains(int k);
+		TreeNode<E>* getNode(int k);
 		bool deleteNode(int k);
 
 		bool isEmpty();
@@ -132,12 +133,12 @@ void BSTree<E>::insert(E data, int k)
 }
 
 template<class E>
-bool BSTree<E>::contains(int k)
+TreeNode<E>* BSTree<E>::getNode(int k)
 {
 	if(root == NULL)
 	{
 		cout << "The tree is empty, it does not contain your given element." << endl;
-		return false;
+		return NULL;
 	}
 	else
 	{
@@ -157,13 +158,11 @@ bool BSTree<E>::contains(int k)
 			if(current == NULL)
 			{
 				cout << "The tree does not contain your given element." << endl;
-				return false;
+				return NULL;
 			}
 		}
+		return current;
 	}
-
-	cout << "The tree contains your given element." << endl;
-	return true;
 }
 
 template<class E>
@@ -315,7 +314,7 @@ void BSTree<E>::printPostOrder(TreeNode<E> *n)	//Should use getRoot as argument.
 	if(n != NULL)
 	{
 		printPostOrder(n -> left);
-		printInOrder(n -> right);
+		printPostOrder(n -> right);
 
 		cout << n->element << endl;
 	}
@@ -328,8 +327,8 @@ void BSTree<E>::printPreOrder(TreeNode<E> *n)	//Should use getRoot as argument.
 	{
 		cout << n->element << endl;
 
-		printPostOrder(n -> left);
-		printInOrder(n -> right);
+		printPreOrder(n -> left);
+		printPreOrder(n -> right);
 	}
 }
 
