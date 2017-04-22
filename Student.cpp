@@ -12,8 +12,8 @@ Student::~Student(){
 	
 }
 
-void Student::initStud(){
-	cout << "ID: ";		cin >> id;
+void Student::initStud(int k){
+	id = k;
 	cout << "Name: ";	cin >> name;
 	cout << "Level: ";	cin >> level;
 	cout << "Major: ";	cin >> major;
@@ -45,7 +45,7 @@ void Student::printRecord(){
 	cout << "Name: " << getName() << endl;
 	cout << "Current Level: " << getLevel() << endl;
 	cout << "Major: " << getMajor() << endl;
-	Cout << "Advisor: " << getAdvisor() << endl;
+	cout << "Advisor: " << getAdvisor() << endl;
 }
 
 int Student::getId(){
