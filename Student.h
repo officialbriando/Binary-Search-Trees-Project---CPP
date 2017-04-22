@@ -11,7 +11,7 @@ public:
 	Student();
 	~Student();
 	
-	void initStud();
+	void initStud(int k);
 	void setId(int myId);
 	void setName(string myName);
 	void setLevel(string myLevel);
