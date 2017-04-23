@@ -1,4 +1,6 @@
 //Author: Brian Do & Miguel Gotao
+#ifndef BSTREE_H
+#define BSTREE_H
 
 #include <iostream>
 #include "TreeNode.h"
@@ -349,3 +351,5 @@ int BSTree<E>::getSize()		//To be used with getRoot() method.
 {
 	return size;
 }
+
+#endif /* BSTREE_H */
