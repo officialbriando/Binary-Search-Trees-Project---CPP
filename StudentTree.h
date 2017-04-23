@@ -16,4 +16,5 @@ public:
 	
 	void serializeStudent();
 	void treeTraversal(TreeNode<Student> *n, ofstream& file);
+	void deserializeStudent(string file);
 };
