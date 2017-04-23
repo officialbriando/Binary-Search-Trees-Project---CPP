@@ -1,4 +1,6 @@
 //Author: Brian Do
+#ifndef TREENODE_H
+#define TREENODE_H
 
 using namespace std;
 
@@ -41,3 +43,5 @@ TreeNode<E>::~TreeNode()
 {
 
 }
+
+#endif /* TREENODE_H */
