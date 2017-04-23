@@ -1,4 +1,4 @@
-//Author: Brian Do
+//Author: Brian Do & Miguel Gotao
 
 #include <iostream>
 #include "TreeNode.h"
