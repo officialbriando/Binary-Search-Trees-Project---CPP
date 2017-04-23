@@ -1,6 +1,8 @@
+#include <string>
 #include <iostream>
 #include <fstream>
 #include "FacultyTree.h"
+
 using namespace std;
 
 FacultyTree::FacultyTree(){
@@ -9,6 +11,18 @@ FacultyTree::FacultyTree(){
 
 FacultyTree::~FacultyTree(){
 	
+}
+
+TreeNode<Faculty>* FacultyTree::getRoot()
+{
+	if(myTree.getRoot() != NULL)
+	{
+		return myTree.getRoot();
+	}
+	else
+	{
+		return 0;
+	}
 }
 
 void FacultyTree::addFaculty(int k){
@@ -24,6 +38,31 @@ void FacultyTree::deleteFaculty(int k){
 Faculty FacultyTree::getFaculty(int k){
 	TreeNode<Faculty>* node = myTree.getNode(k);
 	return node->element;
+}
+
+int FacultyTree::getNumAdvisees(int k){
+	Faculty f = getFaculty(k);
+	return f.getStudentNum();
+}
+
+int* FacultyTree::getFacultyAdvisees(int k){
+	Faculty f = getFaculty(k);
+	return f.getAllStudents();
+}
+
+void FacultyTree::addAdvisee(int k, int j){
+	Faculty f = getFaculty(k);
+	f.addStudent(j);
+}
+
+void FacultyTree::removeAdvisee(int k, int j){
+	Faculty f = getFaculty(k);
+	f.removeStudent(j);
+}
+
+void FacultyTree::printFaculty(int k){
+	Faculty f = getFaculty(k);
+	f.printRecord();
 }
 
 void FacultyTree::serializeFaculty(){
@@ -43,7 +82,7 @@ void FacultyTree::treeTraversal(TreeNode<Faculty> *n, ofstream& file){
 }
 
 void FacultyTree::deserializeFaculty(string file){
-	fstream inFile;
+	ifstream inFile;
 	inFile.open(file.c_str());
 	int loop;	inFile >> loop;
 	for(int i = 0; i < loop; ++i){
@@ -60,4 +99,14 @@ void FacultyTree::deserializeFaculty(string file){
 		myTree.insert(node, myId);
 	}
 	inFile.close();
+}
+
+void FacultyTree::printTree(TreeNode<Faculty> *n)
+{
+	if(n != NULL)
+	{
+		printTree(n->left);
+		n->element.printRecord();
+		printTree(n->right);
+	}
 }
