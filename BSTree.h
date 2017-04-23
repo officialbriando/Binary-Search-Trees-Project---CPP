@@ -18,7 +18,6 @@ class BSTree
 		int size;
 
 		void insert(E data, int k);
-		bool contains(int k);
 		TreeNode<E>* getNode(int k);
 		bool deleteNode(int k);
 
