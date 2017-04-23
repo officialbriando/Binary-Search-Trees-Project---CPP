@@ -41,3 +41,19 @@ void StudentTree::treeTraversal(TreeNode<Student> *n, ofstream& file){
 		treeTraversal(n->right, file);
 	}
 }
+
+void StudentTree::deserializeStudent(string file){
+	fstream inFile;
+	inFile.open(file.c_str());
+	int loop;	inFile >> loop;
+	for(int i = 0; i < loop; ++i){
+		Student node = Student();
+		int myId;	inFile >> myId;	node.setId(myId); inFile.get();
+		string myName;	getline(inFile, myName); node.setName(myName);
+		string myLevel;	inFile >> myLevel;	node.setLevel(myLevel);	inFile.get();
+		string myMajor;	getline(inFile, myMajor);	node.setMajor(myMajor);
+		int myAdv;	inFile >> myAdv;	node.setAdvisor(myAdv);
+		myTree.insert(node, myId);
+	}
+	inFile.close();
+}
