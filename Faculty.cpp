@@ -16,6 +16,7 @@ Faculty::~Faculty(){
 
 void Faculty::initFac(int k){
 	id = k;
+	cin.ignore();
 	cout << "Name: ";	getline(cin, name);
 	cout << "Level: ";	cin >> level;	cin.get();
 	cout << "Department: ";	getline(cin, dept);
@@ -80,7 +81,7 @@ void Faculty::addStudent(int id){
 	if(studentNum >=100) cout << "Cannot hold anymore students.\n";
 	else{
 		studentNum++;
-		for(int i=0; i < studentNum; ++i){
+		for(int i = 0; i <= studentNum; ++i){
 			if(students[i] == 0) students[i] = id;
 		}
 	}
@@ -88,7 +89,7 @@ void Faculty::addStudent(int id){
 
 void Faculty::removeStudent(int id){
 	int temp, check = 0;
-	for(int i=0; i<studentNum; ++i){
+	for(int i = 0; i <= studentNum; ++i){
 		temp = students[i];
 		if(temp == id){
 			students[i] = 0;
