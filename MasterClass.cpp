@@ -1,8 +1,5 @@
 #include <iostream>
 #include <fstream>
-#include "FacultyTree.h"
-#include "StudentTree.h"
-#include "GenStack.h"
 #include "MasterClass.h"
 
 using namespace std;
@@ -19,8 +16,8 @@ MasterClass::~MasterClass()
 
 void MasterClass::run()
 {
-	StudentTree masterSTree;
-	FacultyTree masterFTree;
+	StudentTree masterSTree = StudentTree();
+	FacultyTree masterFTree = FacultyTree();
 
 	GenStack<StudentTree> studentStack(5);
 	GenStack<FacultyTree> facultyStack(5);
