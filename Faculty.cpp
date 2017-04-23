@@ -2,11 +2,12 @@
 #include <string>
 #include <fstream>
 #include "Faculty.h"
+
 using namespace std;
 
 Faculty::Faculty(){
 	studentNum = 0;
-	students = new int[5];
+	students = new int[100];
 }
 
 Faculty::~Faculty(){
@@ -37,16 +38,17 @@ void Faculty::setDept(string myDept){
 }
 
 void Faculty::printRecord(){
-	cout << "Faculty ID: " << getId() << endl;
+	cout << "Faculty ID: " << getID() << endl;
 	cout << "Name: " << getName() << endl;
 	cout << "Current Level: " << getLevel() << endl;
 	cout << "Department: " << getDept() << endl;
 	for(int i = 0; i < studentNum; ++i){
 		cout << "Advisee " << i+1 << ": " << getStudent(i) << endl;
 	}
+	cout << endl;
 }
 
-int Faculty::getId(){
+int Faculty::getID(){
 	return id;
 }
 
@@ -66,8 +68,16 @@ int Faculty::getStudent(int n){
 	return students[n];
 }
 
+int* Faculty::getAllStudents(){
+	return students;
+}
+
+int Faculty::getStudentNum(){
+	return studentNum;
+}
+
 void Faculty::addStudent(int id){
-	if(studentNum >=5) cout << "Cannot hold anymore students.\n";
+	if(studentNum >=100) cout << "Cannot hold anymore students.\n";
 	else{
 		studentNum++;
 		for(int i=0; i < studentNum; ++i){
@@ -87,25 +97,25 @@ void Faculty::removeStudent(int id){
 		}
 	}
 	if(check == 0) cout << "Student not found under this advisor.\n";
-	else cout << "Student has been removed.\n";
+	else cout << "Student has been removed from advisor. \n";
 }
 
 bool Faculty::isEqual(Faculty n){
 	int x = id;
-	int y = n.getId();
+	int y = n.getID();
 	if(x=y) return true;
 	else return false;
 }
 
 bool Faculty::isLesser(Faculty n){
 	int x = id;
-	int y = n.getId();
+	int y = n.getID();
 	if(x<y) return true;
 	else return false;
 }
 
 void Faculty::serialize(std::ofstream& file){
-	file << getId() << endl;
+	file << getID() << endl;
 	file << getName() << endl;
 	file << getLevel() << endl;
 	file << getDept() << endl;
