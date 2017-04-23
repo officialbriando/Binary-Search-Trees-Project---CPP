@@ -2,6 +2,7 @@
 #include <string>
 #include <fstream>
 #include "Student.h"
+
 using namespace std;
 
 Student::Student(){
@@ -45,7 +46,7 @@ void Student::printRecord(){
 	cout << "Name: " << getName() << endl;
 	cout << "Current Level: " << getLevel() << endl;
 	cout << "Major: " << getMajor() << endl;
-	cout << "Advisor: " << getAdvisor() << endl;
+	cout << "Advisor: " << getAdvisor() << endl << endl;
 }
 
 int Student::getId(){
