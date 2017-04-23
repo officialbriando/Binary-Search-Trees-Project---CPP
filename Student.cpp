@@ -15,6 +15,7 @@ Student::~Student(){
 
 void Student::initStud(int k){
 	id = k;
+	cin.ignore();
 	cout << "Name: ";	getline(cin, name);
 	cout << "Level: ";	cin >> level;	cin.get();
 	cout << "Major: ";	getline(cin, major);
