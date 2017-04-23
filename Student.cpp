@@ -14,10 +14,10 @@ Student::~Student(){
 
 void Student::initStud(int k){
 	id = k;
-	cout << "Name: ";	cin >> name;
-	cout << "Level: ";	cin >> level;
-	cout << "Major: ";	cin >> major;
-	cout << "Advisor ID: ";	cin >> advisor;	
+	cout << "Name: ";	getline(cin, name);
+	cout << "Level: ";	cin >> level;	cin.get();
+	cout << "Major: ";	getline(cin, major);
+	cout << "Advisor ID: ";	cin >> advisor;	cin.get();
 }
 
 void Student::setId(int myId){
