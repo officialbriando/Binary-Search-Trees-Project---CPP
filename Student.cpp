@@ -6,7 +6,7 @@
 using namespace std;
 
 Student::Student(){
-
+	id = -1;
 }
 
 Student::~Student(){
@@ -14,12 +14,20 @@ Student::~Student(){
 }
 
 void Student::initStud(int k){
-	id = k;
-	cin.ignore();
+	id = k; cin.get();
 	cout << "Name: ";	getline(cin, name);
 	cout << "Level: ";	cin >> level;	cin.get();
 	cout << "Major: ";	getline(cin, major);
-	cout << "Advisor ID: ";	cin >> advisor;	cin.get();
+	cout << "Advisor ID: ";	cin >> advisor;
+	while(cin.fail()){
+		if(cin.fail()){
+			cin.clear();
+			cin.ignore(256, '\n');
+			cout << "Invalid input, please enter a valid ID number: ";
+			cin >> advisor;
+		}
+	}
+	cin.get();
 }
 
 void Student::setId(int myId){
