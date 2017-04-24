@@ -35,13 +35,17 @@ void StudentTree::deleteStudent(int k){
 	myTree.deleteNode(k);
 }
 
-void StudentTree::changeAdvisor(int k, int j){
+void StudentTree::changeAdvisor(int k, int j){	//changes s, not the actual node
 	Student s = getStudent(k);
 	s.setAdvisor(j);
 }
 
 Student StudentTree::getStudent(int k){
 	TreeNode<Student>* node = myTree.getNode(k);
+	if(node == NULL){
+		Student nullStudent = Student();
+		return nullStudent;
+	}
 	return node->element;
 }
 
@@ -52,6 +56,7 @@ int StudentTree::getStudentAdvisor(int k){
 
 void StudentTree::printStudent(int k){
 	Student s = getStudent(k);
+	if(s.getId() == -1) return;
 	s.printRecord();
 }
 
