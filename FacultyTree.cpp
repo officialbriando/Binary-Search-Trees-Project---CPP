@@ -37,6 +37,10 @@ void FacultyTree::deleteFaculty(int k){
 
 Faculty FacultyTree::getFaculty(int k){
 	TreeNode<Faculty>* node = myTree.getNode(k);
+	if(node == NULL){
+		Faculty nullFaculty = Faculty();
+		return nullFaculty;
+	}
 	return node->element;
 }
 
@@ -50,7 +54,7 @@ int* FacultyTree::getFacultyAdvisees(int k){
 	return f.getAllStudents();
 }
 
-void FacultyTree::addAdvisee(int k, int j){
+void FacultyTree::addAdvisee(int k, int j){	//changes f, not the actual node
 	Faculty f = getFaculty(k);
 	f.addStudent(j);
 }
@@ -58,10 +62,13 @@ void FacultyTree::addAdvisee(int k, int j){
 void FacultyTree::removeAdvisee(int k, int j){
 	Faculty f = getFaculty(k);
 	f.removeStudent(j);
+	TreeNode<Faculty>* node = myTree.getNode(k);
+	node -> element = f;
 }
 
 void FacultyTree::printFaculty(int k){
 	Faculty f = getFaculty(k);
+	if(f.getID() == -1) return;
 	f.printRecord();
 }
 
