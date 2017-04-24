@@ -6,6 +6,7 @@
 using namespace std;
 
 Faculty::Faculty(){
+	id = -1;
 	studentNum = 0;
 	students = new int[100];
 }
@@ -15,11 +16,10 @@ Faculty::~Faculty(){
 }
 
 void Faculty::initFac(int k){
-	id = k;
-	cin.ignore();
+	id = k; cin.get();
 	cout << "Name: ";	getline(cin, name);
 	cout << "Level: ";	cin >> level;	cin.get();
-	cout << "Department: ";	getline(cin, dept);
+	cout << "Department: ";	getldine(cin, dept);
 }
 
 void Faculty::setId(int myId){
