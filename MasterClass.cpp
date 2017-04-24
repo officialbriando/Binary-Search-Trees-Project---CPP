@@ -1,5 +1,8 @@
 #include <iostream>
 #include <fstream>
+//#include "FacultyTree.h"
+//#include "StudentTree.h"
+//#include "GenStack.h"
 #include "MasterClass.h"
 
 using namespace std;
@@ -56,6 +59,15 @@ void MasterClass::run()
 				int studentID;
 				cout << "Enter the student ID you wish to display: " << endl;
 				cin >> studentID;
+				
+				while(cin.fail()){
+					if(cin.fail()){
+						cin.clear();
+						cin.ignore(256, '\n');
+						cout << "Invalid input, please enter a valid ID number: ";
+						cin >> studentID;
+					}
+				}
 
 				masterSTree.printStudent(studentID);
 				break;
@@ -66,6 +78,15 @@ void MasterClass::run()
 				cout << "Enter the faculty ID you wish to display: " << endl;
 				cin >> facultyID;
 
+				while(cin.fail()){
+					if(cin.fail()){
+						cin.clear();
+						cin.ignore(256, '\n');
+						cout << "Invalid input, please enter a valid ID number: ";
+						cin >> facultyID;
+					}
+				}
+				
 				masterFTree.printFaculty(facultyID);
 				break;
 			}
@@ -75,6 +96,15 @@ void MasterClass::run()
 				cout << "Enter the student ID you wish to find the advisor of: ";
 				cin >> studentID;
 
+				while(cin.fail()){
+					if(cin.fail()){
+						cin.clear();
+						cin.ignore(256, '\n');
+						cout << "Invalid input, please enter a valid ID number: ";
+						cin >> studentID;
+					}
+				}
+				
 				int facultyID = masterSTree.getStudentAdvisor(studentID);
 				cout << "Here is the advisor information for this student: " << endl;
 				masterFTree.printFaculty(facultyID);
@@ -86,6 +116,15 @@ void MasterClass::run()
 				cout << "Enter the faculty ID you wish to find the advisee(s) of: ";
 				cin >> facultyID;
 
+				while(cin.fail()){
+					if(cin.fail()){
+						cin.clear();
+						cin.ignore(256, '\n');
+						cout << "Invalid input, please enter a valid ID number: ";
+						cin >> facultyID;
+					}
+				}
+				
 				int* facultyAdvisees = masterFTree.getFacultyAdvisees(facultyID);
 
 				cout << "Here are the advisees' information for this advisor: " << endl;
@@ -105,6 +144,15 @@ void MasterClass::run()
 				cout << "Enter the new student's ID: ";
 				cin >> studentID;
 
+				while(cin.fail()){
+					if(cin.fail()){
+						cin.clear();
+						cin.ignore(256, '\n');
+						cout << "Invalid input, please enter a valid ID number: ";
+						cin >> studentID;
+					}
+				}
+				
 				masterSTree.addStudent(studentID);
 				masterFTree.addAdvisee(masterSTree.getStudentAdvisor(studentID), studentID);
 				cout << "Student has been matched with an advisor." << endl;
@@ -120,6 +168,15 @@ void MasterClass::run()
 				cout << "Enter the student ID to be deleted: ";
 				cin >> studentID;
 
+				while(cin.fail()){
+					if(cin.fail()){
+						cin.clear();
+						cin.ignore(256, '\n');
+						cout << "Invalid input, please enter a valid ID number: ";
+						cin >> studentID;
+					}
+				}
+				
 				masterFTree.removeAdvisee(masterSTree.getStudentAdvisor(studentID), studentID);
 				masterSTree.deleteStudent(studentID);
 				cout << "Student has been deleted from tree." << endl;
@@ -134,6 +191,15 @@ void MasterClass::run()
 				cout << "Enter the new faculty ID: ";
 				cin >> facultyID;
 
+				while(cin.fail()){
+					if(cin.fail()){
+						cin.clear();
+						cin.ignore(256, '\n');
+						cout << "Invalid input, please enter a valid ID number: ";
+						cin >> facultyID;
+					}
+				}
+				
 				masterFTree.addFaculty(facultyID);
 
 				studentStack.push(masterSTree);
@@ -146,6 +212,15 @@ void MasterClass::run()
 				cout << "Enter the faculty ID to be deleted: ";
 				cin >> facultyID;
 
+				while(cin.fail()){
+					if(cin.fail()){
+						cin.clear();
+						cin.ignore(256, '\n');
+						cout << "Invalid input, please enter a valid ID number: ";
+						cin >> facultyID;
+					}
+				}
+				
 				int* facultyAdvisees = masterFTree.getFacultyAdvisees(facultyID);
 
 				for(int i = 0; i < 100; ++i)
@@ -170,9 +245,27 @@ void MasterClass::run()
 				cout << "Enter the student whose advisor is being changed: ";
 				cin >> studentID;
 
+				while(cin.fail()){
+					if(cin.fail()){
+						cin.clear();
+						cin.ignore(256, '\n');
+						cout << "Invalid input, please enter a valid ID number: ";
+						cin >> studentID;
+					}
+				}
+				
 				cout << "Enter the new advisor ID: ";
 				cin >> facultyID;
 
+				while(cin.fail()){
+					if(cin.fail()){
+						cin.clear();
+						cin.ignore(256, '\n');
+						cout << "Invalid input, please enter a valid ID number: ";
+						cin >> facultyID;
+					}
+				}
+				
 				masterFTree.removeAdvisee(masterSTree.getStudentAdvisor(studentID), studentID);
 				masterSTree.changeAdvisor(studentID, facultyID);
 				masterFTree.addAdvisee(masterSTree.getStudentAdvisor(studentID), studentID);
@@ -189,9 +282,27 @@ void MasterClass::run()
 				cout << "Enter the advisor to remove a student from: ";
 				cin >> facultyID;
 
+				while(cin.fail()){
+					if(cin.fail()){
+						cin.clear();
+						cin.ignore(256, '\n');
+						cout << "Invalid input, please enter a valid ID number: ";
+						cin >> facultyID;
+					}
+				}
+				
 				cout << "Enter the student you are removing: ";
 				cin >> studentID;
 
+				while(cin.fail()){
+					if(cin.fail()){
+						cin.clear();
+						cin.ignore(256, '\n');
+						cout << "Invalid input, please enter a valid ID number: ";
+						cin >> studentID;
+					}
+				}
+				
 				masterSTree.changeAdvisor(studentID, masterFTree.getRoot()->element.getID());
 				masterFTree.removeAdvisee(facultyID, studentID);
 
@@ -212,8 +323,15 @@ void MasterClass::run()
 				break;
 			}
 
-			default:
-				break;				
+			default:{
+				cout << "Incorrect input.\n";
+				if(cin.fail())
+				{
+						cin.clear();
+						cin.ignore(256, '\n');
+				}
+				break;
+			}
 		}
 	}
 
