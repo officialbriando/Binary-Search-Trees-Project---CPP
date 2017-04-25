@@ -134,17 +134,26 @@ void MasterClass::run()
 			} //Confirmed.
 
 			case 7:{
+				studentStack.push(masterSTree);
+				facultyStack.push(masterFTree);
+
+				if(masterFTree.getRoot() == NULL)
+				{
+					cout << "Unable to add new student, here are no available advisors." << endl;
+					break;
+				}
 				int studentID = masterSTree.addStudent();
 				masterFTree.addAdvisee(masterSTree.getStudentAdvisor(studentID), studentID);
 				cout << "Student has been matched with an advisor." << endl;
 				cout << "Student has been added." << endl;
 
-				studentStack.push(masterSTree);
-				facultyStack.push(masterFTree);
 				break;
 			} //Confirmed.
 
 			case 8:{
+				studentStack.push(masterSTree);
+				facultyStack.push(masterFTree);
+
 				int studentID;
 				cout << "Enter the student ID to be deleted: ";
 				cin >> studentID;
@@ -162,20 +171,22 @@ void MasterClass::run()
 				masterSTree.deleteStudent(studentID);
 				cout << "Student has been deleted from tree." << endl;
 
-				studentStack.push(masterSTree);
-				facultyStack.push(masterFTree);
 				break;
 			} //Confirmed.
 
 			case 9:{
-				masterFTree.addFaculty();
-
 				studentStack.push(masterSTree);
 				facultyStack.push(masterFTree);
+
+				masterFTree.addFaculty();
+
 				break;
 			} //Confirmed.
 
 			case 10:{
+				studentStack.push(masterSTree);
+				facultyStack.push(masterFTree);
+
 				int facultyID;
 				cout << "Enter the faculty ID to be deleted: ";
 				cin >> facultyID;
@@ -204,12 +215,13 @@ void MasterClass::run()
 				masterFTree.deleteFaculty(facultyID);
 				cout << "Faculty has been deleted from tree." << endl;
 
-				studentStack.push(masterSTree);
-				facultyStack.push(masterFTree);
 				break;
 			} //Confirmed.
 
 			case 11:{
+				studentStack.push(masterSTree);
+				facultyStack.push(masterFTree);
+
 				int studentID, facultyID;
 				cout << "Enter the student whose advisor is being changed: ";
 				cin >> studentID;
@@ -241,12 +253,13 @@ void MasterClass::run()
 
 				cout << "Student's advisor has been changed." << endl;
 
-				studentStack.push(masterSTree);
-				facultyStack.push(masterFTree);
 				break;
 			} //Confirmed.
 
 			case 12:{
+				studentStack.push(masterSTree);
+				facultyStack.push(masterFTree);
+
 				int facultyID, studentID;
 				cout << "Enter the advisor to remove a student from: ";
 				cin >> facultyID;
@@ -277,8 +290,6 @@ void MasterClass::run()
 
 				cout << "Student has been removed from advisor's list." << endl;
 
-				studentStack.push(masterSTree);
-				facultyStack.push(masterFTree);
 				break;
 			}
 
@@ -290,10 +301,6 @@ void MasterClass::run()
 			case 14:{
 				keepGoing = false;
 				break;
-			}
-
-			case 15:{
-				masterFTree.getRoot()->element.printRecord();
 			}
 
 			default:{
