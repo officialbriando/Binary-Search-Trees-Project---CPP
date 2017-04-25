@@ -30,9 +30,11 @@ TreeNode<Student>* StudentTree::getRoot()
 
 int StudentTree::addStudent()
 {
-	int myID, myAdv; string myName, myLevel, myMajor;
+	int myID, myAdv;
+	double myGpa;
+	string myName, myLevel, myMajor;
 
-	cout << "Student ID#: "; cin >> myID;
+	cout << "Student ID#: "; cin >> myID; cin.ignore(256, '\n');
 	while(cin.fail()){
 		if(cin.fail()){
 			cin.clear();
@@ -41,9 +43,18 @@ int StudentTree::addStudent()
 			cin >> myID;
 		}
 	}
-	cout << "Name: "; cin >> myName;
-	cout << "Level: "; cin >> myLevel;
-	cout << "Major: "; cin >> myMajor;
+	cout << "Name: "; getline(cin, myName);
+	cout << "Level: "; getline(cin, myLevel);
+	cout << "Major: "; getline(cin, myMajor);
+	cout << "GPA: ";	cin >> myGpa;
+	while(cin.fail() || myGpa < 0 || myGpa > 4){
+		if(cin.fail()){
+			cin.clear();
+			cin.ignore(256, '\n');
+		}
+		cout << "Invalid input, please enter a valid GPA: ";
+		cin >> myID;
+	}
 	cout << "Advisor ID#: "; cin >> myAdv;
 	while(cin.fail()){
 		if(cin.fail()){
@@ -53,10 +64,9 @@ int StudentTree::addStudent()
 			cin >> myAdv;
 		}
 	}
-
-	Student s(myID, myName, myLevel, myMajor, myAdv);
+	cin.get();
+	Student s(myID, myName, myLevel, myMajor, myGpa, myAdv);
 	myTree.insert(s, myID);
-
 	return myID;
 }
 
@@ -78,6 +88,10 @@ TreeNode<Student>* StudentTree::getStudentNode(int k)
 void StudentTree::changeStudentAdvisor(int k, int j)
 {
 	TreeNode<Student>* node = getStudentNode(k);
+	if(node == NULL)
+	{
+		return;
+	}
 	node->element.setAdvisor(j);
 }
 
@@ -85,6 +99,10 @@ void StudentTree::changeStudentAdvisor(int k, int j)
 int StudentTree::getStudentAdvisor(int k)
 {
 	TreeNode<Student>* node = getStudentNode(k);
+	if(node == NULL)
+	{
+		return 0;
+	}
 	return node->element.getAdvisor();
 }
 
@@ -138,5 +156,3 @@ void StudentTree::deserializeStudent(string file)
 	}
 	inFile.close();
 }
-
-
