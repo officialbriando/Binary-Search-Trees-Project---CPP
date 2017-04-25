@@ -5,19 +5,19 @@ using namespace std;
 class Faculty
 {
 	private:
-		int id;
+		int ID;
 		string name;
 		string level;
 		string dept;
-		int studentNum;
-		int *students;
+		int numAdvisees;
+		int *advisees;
 		
 	public:
 		Faculty();
+		Faculty(int myID, string myName, string myLevel, string myDept);
 		~Faculty();
 		
-		void initFac(int k);
-		void setId(int myId);
+		void setID(int myID);
 		void setName(string myName);
 		void setLevel(string myLevel);
 		void setDept(string myDept);
@@ -27,12 +27,13 @@ class Faculty
 		string getName();
 		string getLevel();
 		string getDept();
-		int* getAllStudents();
-		int getStudentNum();
-		int getStudent(int n);
-		
+
+		int* getAllAdvisees();
+		int getNumAdvisees();
+		int getStudent(int n);		
 		void addStudent(int id);
 		void removeStudent(int id);
+
 		bool isEqual(Faculty n);
 		bool isLesser(Faculty n);
 		void serialize(ofstream& file);
