@@ -9,11 +9,12 @@ Student::Student(){
 	ID = -1;
 }
 
-Student::Student(int myID, string myName, string myLevel, string myMajor, int myAdv){
+Student::Student(int myID, string myName, string myLevel, string myMajor, double myGpa, int myAdv){
 	ID = myID;
 	name = myName;
 	level = myLevel;
 	major = myMajor;
+	gpa = myGpa;
 	advisorID = myAdv;
 }
 
@@ -54,6 +55,10 @@ void Student::setMajor(string myMajor){
 	major = myMajor;
 }
 
+void Student::setGpa(double myGpa){
+	gpa = myGpa;
+}
+
 void Student::setAdvisor(int myAdv){
 	advisorID = myAdv;
 }
@@ -63,6 +68,7 @@ void Student::printRecord(){
 	cout << "Name: " << name << endl;
 	cout << "Current Level: " << level << endl;
 	cout << "Major: " << major << endl;
+	cout << "GPA: " << gpa << endl;
 	cout << "Advisor: " << advisorID << endl << endl;
 }
 
@@ -80,6 +86,10 @@ string Student::getLevel(){
 
 string Student::getMajor(){
 	return major;
+}
+
+double Student::getGpa(){
+	return gpa;
 }
 
 int Student::getAdvisor(){
@@ -105,5 +115,6 @@ void Student::serialize(std::ofstream& file){	//take contents and out to file
 	file << getName() << endl;
 	file << getLevel() << endl;
 	file << getMajor() << endl;
+	file << getGpa() << endl;
 	file << getAdvisor() << endl;
 }
