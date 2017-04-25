@@ -127,6 +127,10 @@ void BSTree<E>::insert(E data, int k)
 					break;
 				}
 			}
+			else
+			{
+				cout << "Node already occupied, cannot add.\n";
+			}
 		}
 	}
 
