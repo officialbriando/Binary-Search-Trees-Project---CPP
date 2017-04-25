@@ -205,7 +205,7 @@ bool BSTree<E>::deleteNode(int k)
 	{
 		if(current == root)
 		{
-			root == NULL;
+			root = NULL;
 		}
 		else if(isLeft)
 		{
@@ -342,7 +342,7 @@ TreeNode<E>* BSTree<E>::getRoot()
 	}
 	else
 	{
-		return 0;
+		return NULL;
 	}
 }
 
