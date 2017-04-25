@@ -16,13 +16,15 @@ StudentTree::~StudentTree(){
 
 TreeNode<Student>* StudentTree::getRoot()
 {
-	if(myTree.getRoot() != NULL)
+	TreeNode<Student>* node = myTree.getRoot();
+
+	if(node != NULL)
 	{
-		return myTree.getRoot();
+		return node;
 	}
 	else
 	{
-		return 0;
+		return NULL;
 	}
 }
 
@@ -68,7 +70,7 @@ TreeNode<Student>* StudentTree::getStudentNode(int k)
 	TreeNode<Student>* node = myTree.getNode(k);
 	if(node == NULL)
 	{
-		return 0;
+		return NULL;
 	}
 	return node;
 }
