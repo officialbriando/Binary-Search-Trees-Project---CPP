@@ -5,8 +5,9 @@
 
 using namespace std;
 
-StudentTree::StudentTree(){
-	BSTree<Student> myTree = BSTree<Student>();
+StudentTree::StudentTree()
+{
+
 }
 
 StudentTree::~StudentTree(){
@@ -25,51 +26,92 @@ TreeNode<Student>* StudentTree::getRoot()
 	}
 }
 
-void StudentTree::addStudent(int k){
-	Student node = Student();
-	node.initStud(k);
-	myTree.insert(node, k);
+int StudentTree::addStudent()
+{
+	int myID, myAdv; string myName, myLevel, myMajor;
+
+	cout << "Student ID#: "; cin >> myID;
+	while(cin.fail()){
+		if(cin.fail()){
+			cin.clear();
+			cin.ignore(256, '\n');
+			cout << "Invalid input, please enter a valid ID number: ";
+			cin >> myID;
+		}
+	}
+	cout << "Name: "; cin >> myName;
+	cout << "Level: "; cin >> myLevel;
+	cout << "Major: "; cin >> myMajor;
+	cout << "Advisor ID#: "; cin >> myAdv;
+	while(cin.fail()){
+		if(cin.fail()){
+			cin.clear();
+			cin.ignore(256, '\n');
+			cout << "Invalid input, please enter a valid ID number: ";
+			cin >> myAdv;
+		}
+	}
+
+	Student s(myID, myName, myLevel, myMajor, myAdv);
+	myTree.insert(s, myID);
+
+	return myID;
 }
 
-void StudentTree::deleteStudent(int k){
+void StudentTree::deleteStudent(int k)
+{
 	myTree.deleteNode(k);
 }
 
-void StudentTree::changeAdvisor(int k, int j){
-	Student s = getStudent(k);
-	s.setAdvisor(j);
+TreeNode<Student>* StudentTree::getStudentNode(int k)
+{
 	TreeNode<Student>* node = myTree.getNode(k);
-	node->element = s;
-}
-
-Student StudentTree::getStudent(int k){
-	TreeNode<Student>* node = myTree.getNode(k);
-	if(node == NULL){
-		Student nullStudent = Student();
-		return nullStudent;
+	if(node == NULL)
+	{
+		return 0;
 	}
-	return node->element;
+	return node;
 }
 
-int StudentTree::getStudentAdvisor(int k){
-	Student s = getStudent(k);
-	return s.getAdvisor();
+void StudentTree::changeStudentAdvisor(int k, int j)
+{
+	TreeNode<Student>* node = getStudentNode(k);
+	node->element.setAdvisor(j);
 }
 
-void StudentTree::printStudent(int k){
-	Student s = getStudent(k);
-	if(s.getId() == -1) return;
-	s.printRecord();
+
+int StudentTree::getStudentAdvisor(int k)
+{
+	TreeNode<Student>* node = getStudentNode(k);
+	return node->element.getAdvisor();
 }
 
-void StudentTree::serializeStudent(){
+void StudentTree::printStudent(int k)
+{
+	TreeNode<Student>* node = getStudentNode(k);
+	node->element.printRecord();
+}
+
+void StudentTree::printTree(TreeNode<Student>* n)
+{
+	if(n != NULL)
+	{
+		printTree(n->left);
+		n->element.printRecord();
+		printTree(n->right);
+	}
+}
+
+void StudentTree::serializeStudent()
+{
 	ofstream outFile("studentTable.txt");
 	outFile << myTree.getSize() << endl;
 	
 	treeTraversal(myTree.getRoot(), outFile);
 }
 
-void StudentTree::treeTraversal(TreeNode<Student> *n, ofstream& file){
+void StudentTree::treeTraversal(TreeNode<Student> *n, ofstream& file)
+{
 	if(n != NULL)
 	{
 		n->element.serialize(file);
@@ -78,13 +120,14 @@ void StudentTree::treeTraversal(TreeNode<Student> *n, ofstream& file){
 	}
 }
 
-void StudentTree::deserializeStudent(string file){
+void StudentTree::deserializeStudent(string file)
+{
 	ifstream inFile;
 	inFile.open(file.c_str());
 	int loop;	inFile >> loop;
 	for(int i = 0; i < loop; ++i){
 		Student node = Student();
-		int myId;	inFile >> myId;	node.setId(myId); inFile.get();
+		int myId;	inFile >> myId;	node.setID(myId); inFile.get();
 		string myName;	getline(inFile, myName); node.setName(myName);
 		string myLevel;	inFile >> myLevel;	node.setLevel(myLevel);	inFile.get();
 		string myMajor;	getline(inFile, myMajor);	node.setMajor(myMajor);
@@ -94,12 +137,4 @@ void StudentTree::deserializeStudent(string file){
 	inFile.close();
 }
 
-void StudentTree::printTree(TreeNode<Student> *n)
-{
-	if(n != NULL)
-	{
-		printTree(n->left);
-		n->element.printRecord();
-		printTree(n->right);
-	}
-}
+
