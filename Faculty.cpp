@@ -137,5 +137,6 @@ void Faculty::serialize(std::ofstream& file){
 	file << getName() << endl;
 	file << getLevel() << endl;
 	file << getDept() << endl;
+	file << getNumAdvisees() << endl;
 	for(int i = 0; i < numAdvisees; ++i) file << getStudent(i) << endl;
 }
