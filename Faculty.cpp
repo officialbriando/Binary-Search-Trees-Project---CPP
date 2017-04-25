@@ -55,7 +55,7 @@ void Faculty::printRecord(){
 	cout << "Current Level: " << level << endl;
 	cout << "Department: " << dept << endl;
 	cout << "Advisee IDs: " << endl;
-	for(int i = 0; i < 100; ++i){
+	for(int i = 0; i < numAdvisees; ++i){
 		if(advisees[i] != 0){
 			cout << advisees[i] << endl;
 		}
