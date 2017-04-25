@@ -5,13 +5,12 @@
 
 using namespace std;
 
-FacultyTree::FacultyTree(){
-	BSTree<Faculty> myTree = BSTree<Faculty>();
+FacultyTree::FacultyTree()
+{
+
 }
 
-FacultyTree::~FacultyTree(){
-	
-}
+FacultyTree::~FacultyTree() {}
 
 TreeNode<Faculty>* FacultyTree::getRoot()
 {
@@ -25,53 +24,71 @@ TreeNode<Faculty>* FacultyTree::getRoot()
 	}
 }
 
-void FacultyTree::addFaculty(int k){
-	Faculty node = Faculty();
-	node.initFac(k);
-	myTree.insert(node, k);
+TreeNode<Faculty>* FacultyTree::getFacultyNode(int k)
+{
+	TreeNode<Faculty>* node = myTree.getNode(k);
+	if(node == NULL)
+	{
+		return 0;
+	}
+	return node;
 }
 
-void FacultyTree::deleteFaculty(int k){
+void FacultyTree::addFaculty()
+{
+	int myID; string myName, myLevel, myDept;
+	cout << "Faculty ID#: "; cin >> myID;
+	while(cin.fail()){
+		if(cin.fail()){
+			cin.clear();
+			cin.ignore(256, '\n');
+			cout << "Invalid input, please enter a valid ID number: ";
+			cin >> myID;
+		}
+	}
+	cout << "Name: "; cin >> myName;
+	cout << "Level: "; cin >> myLevel;
+	cout << "Department: "; cin >> myDept;
+
+	Faculty f(myID, myName, myLevel, myDept);
+	myTree.insert(f, myID);
+}
+
+void FacultyTree::deleteFaculty(int k)
+{
 	myTree.deleteNode(k);
 }
 
-Faculty FacultyTree::getFaculty(int k){
-	TreeNode<Faculty>* node = myTree.getNode(k);
-	if(node == NULL){
-		Faculty nullFaculty = Faculty();
-		return nullFaculty;
-	}
-	return node->element;
+int FacultyTree::getNumAdvisees(int k)
+{
+	TreeNode<Faculty>* node = getFacultyNode(k);
+	return node->element.getNumAdvisees();
 }
 
-int FacultyTree::getNumAdvisees(int k){
-	Faculty f = getFaculty(k);
-	return f.getStudentNum();
+int* FacultyTree::getFacultyAdvisees(int k)
+{
+	TreeNode<Faculty>* node = getFacultyNode(k);
+	return node->element.getAllAdvisees();
 }
 
-int* FacultyTree::getFacultyAdvisees(int k){
-	Faculty f = getFaculty(k);
-	return f.getAllStudents();
+void FacultyTree::addAdvisee(int k, int j)
+{
+	TreeNode<Faculty>* node = getFacultyNode(k);
+	node->element.addStudent(j);
 }
 
-void FacultyTree::addAdvisee(int k, int j){
-	Faculty f = getFaculty(k);
-	f.addStudent(j);
-	TreeNode<Faculty>* node = myTree.getNode(k);
-	node -> element = f;
+void FacultyTree::removeAdvisee(int k, int j)
+{
+	TreeNode<Faculty>* node = getFacultyNode(k);
+	node->element.removeStudent(j);
 }
 
-void FacultyTree::removeAdvisee(int k, int j){
-	Faculty f = getFaculty(k);
-	f.removeStudent(j);
-	TreeNode<Faculty>* node = myTree.getNode(k);
-	node -> element = f;
-}
+void FacultyTree::printFaculty(int k)
+{
+	TreeNode<Faculty>* node = getFacultyNode(k);
+	if(node->element.getID() == -1) return;
 
-void FacultyTree::printFaculty(int k){
-	Faculty f = getFaculty(k);
-	if(f.getID() == -1) return;
-	f.printRecord();
+	node->element.printRecord();
 }
 
 void FacultyTree::serializeFaculty(){
@@ -96,7 +113,7 @@ void FacultyTree::deserializeFaculty(string file){
 	int loop;	inFile >> loop;
 	for(int i = 0; i < loop; ++i){
 		Faculty node = Faculty();
-		int myId;	inFile >> myId;	node.setId(myId); inFile.get();
+		int myId;	inFile >> myId;	node.setID(myId); inFile.get();
 		string myName;	getline(inFile, myName); node.setName(myName);
 		string myLevel;	inFile >> myLevel;	node.setLevel(myLevel);	inFile.get();
 		string myDept;	getline(inFile, myDept);	node.setDept(myDept);
