@@ -119,7 +119,8 @@ void FacultyTree::deserializeFaculty(string file){
 		string myName;	getline(inFile, myName); node.setName(myName);
 		string myLevel;	inFile >> myLevel;	node.setLevel(myLevel);	inFile.get();
 		string myDept;	getline(inFile, myDept);	node.setDept(myDept);
-		for(int i = 0; i < 5; ++i)
+		int myNumAdvisees;	inFile >> myNumAdvisees;
+		for(int i = 0; i < myNumAdvisees; ++i)
 		{
 			int myStu;	inFile >> myStu;	inFile.get();
 			node.addStudent(myStu);
