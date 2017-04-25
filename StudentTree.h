@@ -16,10 +16,11 @@ class StudentTree
 
 		TreeNode<Student>* getRoot();
 		
-		void addStudent(int k);
+		int addStudent();
 		void deleteStudent(int k);
-		void changeAdvisor(int k, int j);
-		Student getStudent(int k);
+
+		void changeStudentAdvisor(int k, int j);
+		TreeNode<Student>* getStudentNode(int k);
 		int getStudentAdvisor(int k);
 		void printStudent(int k);
 		
