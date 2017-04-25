@@ -14,11 +14,13 @@ class FacultyTree
 		~FacultyTree();
 
 		TreeNode<Faculty>* getRoot();
+		TreeNode<Faculty>* getFacultyNode(int k);
 
-		void addFaculty(int k);
+		void addFaculty();
 		void deleteFaculty(int k);
-		Faculty getFaculty(int k);
+
 		void printFaculty(int k);
+
 		int* getFacultyAdvisees(int k);
 		int getNumAdvisees(int k);
 		void addAdvisee(int k, int j);
