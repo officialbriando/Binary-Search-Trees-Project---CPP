@@ -1,8 +1,5 @@
 #include <iostream>
 #include <fstream>
-//#include "FacultyTree.h"
-//#include "StudentTree.h"
-//#include "GenStack.h"
 #include "MasterClass.h"
 
 using namespace std;
@@ -19,7 +16,7 @@ void MasterClass::run()
 	GenStack<StudentTree> studentStack(5);
 	GenStack<FacultyTree> facultyStack(5);
 
-	/*if(checkStudentTables())
+	if(checkStudentTables())
 	{
 		masterSTree.deserializeStudent("studentTable.txt");
 	}
@@ -27,7 +24,7 @@ void MasterClass::run()
 	if(checkFacultyTables())
 	{
 		masterFTree.deserializeFaculty("facultyTable.txt");
-	}*/
+	}
 
 	bool keepGoing = true;
 	while(keepGoing)
@@ -212,7 +209,8 @@ void MasterClass::run()
 
 				for(int i = 0; i < 100; ++i)
 				{
-					if(facultyAdvisees[i] != 0)
+					if (facultyAdvisees == NULL) break;
+					else if(facultyAdvisees[i] != 0)
 					{
 						masterSTree.changeStudentAdvisor(facultyAdvisees[i], masterFTree.getRoot()->element.getID());
 						masterFTree.addAdvisee(masterFTree.getRoot()->element.getID(), facultyAdvisees[i]);
@@ -327,12 +325,12 @@ void MasterClass::run()
 	masterFTree.serializeFaculty();
 }
 
-/*bool MasterClass::checkStudentTables()
+bool MasterClass::checkStudentTables()
 {
 	ifstream inputStream;
-	string fileName = "studentTable.txt";
+	inputStream.open("studentTable.txt");
 
-	if(inputStream(fileName))
+	if(inputStream.is_open())
 	{
 		cout << "Current student table exists." << endl;
 		return true;
@@ -346,9 +344,9 @@ void MasterClass::run()
 bool MasterClass::checkFacultyTables()
 {
 	ifstream inputStream;
-	string fileName = "facultyTable.txt";
+	inputStream.open("facultyTable.txt");
 
-	if(inputStream(fileName))
+	if(inputStream.is_open())
 	{
 		cout << "Current faculty table exists." << endl;
 		return true;
@@ -357,7 +355,7 @@ bool MasterClass::checkFacultyTables()
 	{
 		return false;
 	}
-}*/
+}
 
 void MasterClass::printMenu()
 {
