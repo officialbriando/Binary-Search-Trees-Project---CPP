@@ -19,7 +19,7 @@ void Faculty::initFac(int k){
 	id = k; cin.get();
 	cout << "Name: ";	getline(cin, name);
 	cout << "Level: ";	cin >> level;	cin.get();
-	cout << "Department: ";	getldine(cin, dept);
+	cout << "Department: ";	getline(cin, dept);
 }
 
 void Faculty::setId(int myId){
@@ -81,21 +81,25 @@ void Faculty::addStudent(int id){
 	if(studentNum >=100) cout << "Cannot hold anymore students.\n";
 	else{
 		studentNum++;
-		for(int i = 0; i <= studentNum; ++i){
-			if(students[i] == 0) students[i] = id;
+		for(int i = 0; i < 100; ++i){
+			if(students[i] == 0){
+				students[i] = id;
+				break;
+			}
 		}
 	}
 }
 
 void Faculty::removeStudent(int id){
 	int temp, check = 0;
-	for(int i = 0; i <= studentNum; ++i){
+	for(int i = 0; i < 100; ++i){
 		temp = students[i];
 		if(temp == id){
 			students[i] = 0;
 			check = 1;
 			studentNum--;
 		}
+		if(check == 1) break;
 	}
 	if(check == 0) cout << "Student not found under this advisor.\n";
 	else cout << "Student has been removed from advisor. \n";
