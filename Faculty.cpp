@@ -6,24 +6,35 @@
 using namespace std;
 
 Faculty::Faculty(){
-	id = -1;
-	studentNum = 0;
-	students = new int[100];
+	ID = -1;
+	numAdvisees = 0;
+	advisees = new int[100];
+}
+
+Faculty::Faculty(int myID, string myName, string myLevel, string myDept){
+	ID = myID;
+	name = myName;
+	level = myLevel;
+	dept = myDept;
+
+	numAdvisees = 0;
+	advisees = new int[100];
 }
 
 Faculty::~Faculty(){
 	
 }
 
-void Faculty::initFac(int k){
+
+/*void Faculty::initFac(int k){
 	id = k; cin.get();
 	cout << "Name: ";	getline(cin, name);
 	cout << "Level: ";	cin >> level;	cin.get();
 	cout << "Department: ";	getline(cin, dept);
-}
+}*/
 
-void Faculty::setId(int myId){
-	id = myId;
+void Faculty::setID(int myID){
+	ID = myID;
 }
 
 void Faculty::setName(string myName){
@@ -39,18 +50,20 @@ void Faculty::setDept(string myDept){
 }
 
 void Faculty::printRecord(){
-	cout << "Faculty ID: " << getID() << endl;
-	cout << "Name: " << getName() << endl;
-	cout << "Current Level: " << getLevel() << endl;
-	cout << "Department: " << getDept() << endl;
-	for(int i = 0; i < studentNum; ++i){
-		cout << "Advisee " << i+1 << ": " << getStudent(i) << endl;
-	}
-	cout << endl;
+	cout << "Faculty ID: " << ID << endl;
+	cout << "Name: " << name << endl;
+	cout << "Current Level: " << level << endl;
+	cout << "Department: " << dept << endl;
+	cout << "Advisee IDs: " << endl;
+	for(int i = 0; i < 100; ++i){
+		if(advisees[i] != 0){
+			cout << advisees[i] << endl;
+		}
+	}	
 }
 
 int Faculty::getID(){
-	return id;
+	return ID;
 }
 
 string Faculty::getName(){
@@ -66,24 +79,24 @@ string Faculty::getDept(){
 }
 
 int Faculty::getStudent(int n){
-	return students[n];
+	return advisees[n];
 }
 
-int* Faculty::getAllStudents(){
-	return students;
+int* Faculty::getAllAdvisees(){
+	return advisees;
 }
 
-int Faculty::getStudentNum(){
-	return studentNum;
+int Faculty::getNumAdvisees(){
+	return numAdvisees;
 }
 
 void Faculty::addStudent(int id){
-	if(studentNum >=100) cout << "Cannot hold anymore students.\n";
+	if(numAdvisees >=100) cout << "Cannot hold anymore students.\n";
 	else{
-		studentNum++;
+		numAdvisees++;
 		for(int i = 0; i < 100; ++i){
-			if(students[i] == 0){
-				students[i] = id;
+			if(advisees[i] == 0){
+				advisees[i] = id;
 				break;
 			}
 		}
@@ -93,11 +106,11 @@ void Faculty::addStudent(int id){
 void Faculty::removeStudent(int id){
 	int temp, check = 0;
 	for(int i = 0; i < 100; ++i){
-		temp = students[i];
+		temp = advisees[i];
 		if(temp == id){
-			students[i] = 0;
+			advisees[i] = 0;
 			check = 1;
-			studentNum--;
+			numAdvisees--;
 		}
 		if(check == 1) break;
 	}
@@ -106,14 +119,14 @@ void Faculty::removeStudent(int id){
 }
 
 bool Faculty::isEqual(Faculty n){
-	int x = id;
+	int x = ID;
 	int y = n.getID();
 	if(x=y) return true;
 	else return false;
 }
 
 bool Faculty::isLesser(Faculty n){
-	int x = id;
+	int x = ID;
 	int y = n.getID();
 	if(x<y) return true;
 	else return false;
@@ -124,5 +137,5 @@ void Faculty::serialize(std::ofstream& file){
 	file << getName() << endl;
 	file << getLevel() << endl;
 	file << getDept() << endl;
-	for(int i = 0; i < studentNum; ++i) file << getStudent(i) << endl;
+	for(int i = 0; i < numAdvisees; ++i) file << getStudent(i) << endl;
 }
