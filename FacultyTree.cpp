@@ -14,13 +14,15 @@ FacultyTree::~FacultyTree() {}
 
 TreeNode<Faculty>* FacultyTree::getRoot()
 {
-	if(myTree.getRoot() != NULL)
+	TreeNode<Faculty>* node = myTree.getRoot();
+
+	if(node != NULL)
 	{
-		return myTree.getRoot();
+		return node;
 	}
 	else
 	{
-		return 0;
+		return NULL;
 	}
 }
 
@@ -29,7 +31,7 @@ TreeNode<Faculty>* FacultyTree::getFacultyNode(int k)
 	TreeNode<Faculty>* node = myTree.getNode(k);
 	if(node == NULL)
 	{
-		return 0;
+		return NULL;
 	}
 	return node;
 }
