@@ -5,25 +5,25 @@ using namespace std;
 class Student
 {
 	private:
-		int id;
+		int ID;
 		string name;
 		string level;
 		string major;
-		int advisor;
+		int advisorID;
 		
 	public:
 		Student();
+		Student(int myID, string myName, string myLevel, string myMajor, int myAdv);
 		~Student();
 		
-		void initStud(int k);
-		void setId(int myId);
+		void setID(int myID);
 		void setName(string myName);
 		void setLevel(string myLevel);
 		void setMajor(string myMajor);
 		void setAdvisor(int myAdv);
 		
 		void printRecord();
-		int getId();
+		int getID();
 		string getName();
 		string getLevel();
 		string getMajor();
