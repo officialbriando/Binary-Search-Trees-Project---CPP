@@ -7,20 +7,14 @@
 
 using namespace std;
 
-MasterClass::MasterClass()
-{
+MasterClass::MasterClass() {}
 
-}
-
-MasterClass::~MasterClass()
-{
-
-}
+MasterClass::~MasterClass() {}
 
 void MasterClass::run()
 {
-	StudentTree masterSTree = StudentTree();
-	FacultyTree masterFTree = FacultyTree();
+	StudentTree masterSTree;
+	FacultyTree masterFTree;
 
 	GenStack<StudentTree> studentStack(5);
 	GenStack<FacultyTree> facultyStack(5);
@@ -48,12 +42,12 @@ void MasterClass::run()
 			case 1:{
 				masterSTree.printTree(masterSTree.getRoot());
 				break;
-			}
+			} //Confirmed working.
 
 			case 2:{
 				masterFTree.printTree(masterFTree.getRoot());
 				break;
-			}
+			} //Confirmed working.
 
 			case 3:{
 				int studentID;
@@ -71,7 +65,7 @@ void MasterClass::run()
 
 				masterSTree.printStudent(studentID);
 				break;
-			}
+			} //Confirmed.
 
 			case 4:{
 				int facultyID;
@@ -89,7 +83,7 @@ void MasterClass::run()
 				
 				masterFTree.printFaculty(facultyID);
 				break;
-			}
+			} //Confirmed.
 
 			case 5:{
 				int studentID;
@@ -109,7 +103,7 @@ void MasterClass::run()
 				cout << "Here is the advisor information for this student: " << endl;
 				masterFTree.printFaculty(facultyID);
 				break;
-			}
+			} //Confirmed
 
 			case 6:{
 				int facultyID;
@@ -137,23 +131,10 @@ void MasterClass::run()
 					}
 				}
 				break;
-			}
+			} //Confirmed.
 
 			case 7:{
-				int studentID;
-				cout << "Enter the new student's ID: ";
-				cin >> studentID;
-
-				while(cin.fail()){
-					if(cin.fail()){
-						cin.clear();
-						cin.ignore(256, '\n');
-						cout << "Invalid input, please enter a valid ID number: ";
-						cin >> studentID;
-					}
-				}
-				
-				masterSTree.addStudent(studentID);
+				int studentID = masterSTree.addStudent();
 				masterFTree.addAdvisee(masterSTree.getStudentAdvisor(studentID), studentID);
 				cout << "Student has been matched with an advisor." << endl;
 				cout << "Student has been added." << endl;
@@ -161,7 +142,7 @@ void MasterClass::run()
 				studentStack.push(masterSTree);
 				facultyStack.push(masterFTree);
 				break;
-			}
+			} //Confirmed.
 
 			case 8:{
 				int studentID;
@@ -184,28 +165,15 @@ void MasterClass::run()
 				studentStack.push(masterSTree);
 				facultyStack.push(masterFTree);
 				break;
-			}
+			} //Confirmed.
 
 			case 9:{
-				int facultyID;
-				cout << "Enter the new faculty ID: ";
-				cin >> facultyID;
-
-				while(cin.fail()){
-					if(cin.fail()){
-						cin.clear();
-						cin.ignore(256, '\n');
-						cout << "Invalid input, please enter a valid ID number: ";
-						cin >> facultyID;
-					}
-				}
-				
-				masterFTree.addFaculty(facultyID);
+				masterFTree.addFaculty();
 
 				studentStack.push(masterSTree);
 				facultyStack.push(masterFTree);
 				break;
-			}
+			} //Confirmed.
 
 			case 10:{
 				int facultyID;
@@ -227,18 +195,19 @@ void MasterClass::run()
 				{
 					if(facultyAdvisees[i] != 0)
 					{
-						masterSTree.changeAdvisor(facultyAdvisees[i], masterFTree.getRoot()->element.getID());
+						masterSTree.changeStudentAdvisor(facultyAdvisees[i], masterFTree.getRoot()->element.getID());
+						masterFTree.addAdvisee(masterFTree.getRoot()->element.getID(), facultyAdvisees[i]);
 					}
 				}
-
 				cout << "Advisees have been repaired with another advisor." << endl;
+
 				masterFTree.deleteFaculty(facultyID);
 				cout << "Faculty has been deleted from tree." << endl;
 
 				studentStack.push(masterSTree);
 				facultyStack.push(masterFTree);
 				break;
-			}
+			} //Confirmed.
 
 			case 11:{
 				int studentID, facultyID;
@@ -267,15 +236,15 @@ void MasterClass::run()
 				}
 				
 				masterFTree.removeAdvisee(masterSTree.getStudentAdvisor(studentID), studentID);
-				masterSTree.changeAdvisor(studentID, facultyID);
-				masterFTree.addAdvisee(masterSTree.getStudentAdvisor(studentID), studentID);
+				masterSTree.changeStudentAdvisor(studentID, facultyID);
+				masterFTree.addAdvisee(facultyID, studentID);
 
 				cout << "Student's advisor has been changed." << endl;
 
 				studentStack.push(masterSTree);
 				facultyStack.push(masterFTree);
 				break;
-			}
+			} //Confirmed.
 
 			case 12:{
 				int facultyID, studentID;
@@ -303,7 +272,7 @@ void MasterClass::run()
 					}
 				}
 				
-				masterSTree.changeAdvisor(studentID, masterFTree.getRoot()->element.getID());
+				masterSTree.changeStudentAdvisor(studentID, masterFTree.getRoot()->element.getID());
 				masterFTree.removeAdvisee(facultyID, studentID);
 
 				cout << "Student has been removed from advisor's list." << endl;
@@ -321,6 +290,10 @@ void MasterClass::run()
 			case 14:{
 				keepGoing = false;
 				break;
+			}
+
+			case 15:{
+				masterFTree.getRoot()->element.printRecord();
 			}
 
 			default:{
