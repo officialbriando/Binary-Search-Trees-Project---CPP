@@ -54,9 +54,11 @@ int* FacultyTree::getFacultyAdvisees(int k){
 	return f.getAllStudents();
 }
 
-void FacultyTree::addAdvisee(int k, int j){	//changes f, not the actual node
+void FacultyTree::addAdvisee(int k, int j){
 	Faculty f = getFaculty(k);
 	f.addStudent(j);
+	TreeNode<Faculty>* node = myTree.getNode(k);
+	node -> element = f;
 }
 
 void FacultyTree::removeAdvisee(int k, int j){
