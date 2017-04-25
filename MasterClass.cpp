@@ -142,7 +142,15 @@ void MasterClass::run()
 					cout << "Unable to add new student, here are no available advisors." << endl;
 					break;
 				}
+
 				int studentID = masterSTree.addStudent();
+
+				if(masterFTree.getFacultyNode(masterSTree.getStudentAdvisor(studentID)) == NULL)
+				{
+					cout << "The advisor does not exist, redo the entry." << endl;
+					masterSTree.deleteStudent(studentID);
+					break;
+				}
 				masterFTree.addAdvisee(masterSTree.getStudentAdvisor(studentID), studentID);
 				cout << "Student has been matched with an advisor." << endl;
 				cout << "Student has been added." << endl;
