@@ -35,9 +35,11 @@ void StudentTree::deleteStudent(int k){
 	myTree.deleteNode(k);
 }
 
-void StudentTree::changeAdvisor(int k, int j){	//changes s, not the actual node
+void StudentTree::changeAdvisor(int k, int j){
 	Student s = getStudent(k);
 	s.setAdvisor(j);
+	TreeNode<Student>* node = myTree.getNode(k);
+	node->element = s;
 }
 
 Student StudentTree::getStudent(int k){
