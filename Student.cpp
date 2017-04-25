@@ -6,14 +6,22 @@
 using namespace std;
 
 Student::Student(){
-	id = -1;
+	ID = -1;
+}
+
+Student::Student(int myID, string myName, string myLevel, string myMajor, int myAdv){
+	ID = myID;
+	name = myName;
+	level = myLevel;
+	major = myMajor;
+	advisorID = myAdv;
 }
 
 Student::~Student(){
 	
 }
 
-void Student::initStud(int k){
+/*void Student::initStud(int k){
 	id = k; cin.get();
 	cout << "Name: ";	getline(cin, name);
 	cout << "Level: ";	cin >> level;	cin.get();
@@ -28,10 +36,10 @@ void Student::initStud(int k){
 		}
 	}
 	cin.get();
-}
+}*/
 
-void Student::setId(int myId){
-	id = myId;
+void Student::setID(int myID){
+	ID = myID;
 }
 
 void Student::setName(string myName){
@@ -47,19 +55,19 @@ void Student::setMajor(string myMajor){
 }
 
 void Student::setAdvisor(int myAdv){
-	advisor = myAdv;
+	advisorID = myAdv;
 }
 
 void Student::printRecord(){
-	cout << "Student ID: " << getId() << endl;
-	cout << "Name: " << getName() << endl;
-	cout << "Current Level: " << getLevel() << endl;
-	cout << "Major: " << getMajor() << endl;
-	cout << "Advisor: " << getAdvisor() << endl << endl;
+	cout << "Student ID: " << ID << endl;
+	cout << "Name: " << name << endl;
+	cout << "Current Level: " << level << endl;
+	cout << "Major: " << major << endl;
+	cout << "Advisor: " << advisorID << endl << endl;
 }
 
-int Student::getId(){
-	return id;
+int Student::getID(){
+	return ID;
 }
 
 string Student::getName(){
@@ -75,25 +83,25 @@ string Student::getMajor(){
 }
 
 int Student::getAdvisor(){
-	return advisor;
+	return advisorID;
 }
 
 bool Student::isEqual(Student n){
-	int x = id;
-	int y = n.getId();
+	int x = ID;
+	int y = n.getID();
 	if(x=y) return true;
 	else return false;
 }
 
 bool Student::isLesser(Student n){
-	int x = id;
-	int y = n.getId();
+	int x = ID;
+	int y = n.getID();
 	if(x<y) return true;
 	else return false;
 }
 
 void Student::serialize(std::ofstream& file){	//take contents and out to file
-	file << getId() << endl;				//file should contain all students
+	file << getID() << endl;				//file should contain all students
 	file << getName() << endl;
 	file << getLevel() << endl;
 	file << getMajor() << endl;
