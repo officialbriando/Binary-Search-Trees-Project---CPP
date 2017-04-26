@@ -1,7 +1,7 @@
 CPSC 350 Assignment 5
 
 Authors:
-Brian Do
+Brian Do     - 2253637
 Miguel Gotao - 2264941
 
 References:
