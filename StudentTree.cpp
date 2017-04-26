@@ -53,7 +53,7 @@ int StudentTree::addStudent()
 			cin.ignore(256, '\n');
 		}
 		cout << "Invalid input, please enter a valid GPA: ";
-		cin >> myID;
+		cin >> myGpa;
 	}
 	cout << "Advisor ID#: "; cin >> myAdv;
 	while(cin.fail()){
@@ -122,6 +122,21 @@ void StudentTree::printTree(TreeNode<Student>* n)
 	}
 }
 
+void StudentTree::searchName(string name, TreeNode<Student>* n)
+{
+	if(n != NULL)
+	{
+		searchName(name, n->left);
+		if(n->element.getName() == name)
+		{
+			cout << "Student with that name has been found." << endl;
+			n->element.printRecord();
+			return;
+		}
+		searchName(name, n->right);
+	}
+}
+
 void StudentTree::serializeStudent()
 {
 	ofstream outFile("studentTable.txt");
@@ -151,6 +166,7 @@ void StudentTree::deserializeStudent(string file)
 		string myName;	getline(inFile, myName); node.setName(myName);
 		string myLevel;	inFile >> myLevel;	node.setLevel(myLevel);	inFile.get();
 		string myMajor;	getline(inFile, myMajor);	node.setMajor(myMajor);
+		double myGpa; inFile >> myGpa; node.setGpa(myGpa);
 		int myAdv;	inFile >> myAdv;	node.setAdvisor(myAdv);
 		myTree.insert(node, myId);
 	}
