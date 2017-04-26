@@ -8,7 +8,7 @@ using namespace std;
 Faculty::Faculty(){
 	ID = -1;
 	numAdvisees = 0;
-	advisees = new int[100];
+	advisees = new int[100]();
 }
 
 Faculty::Faculty(int myID, string myName, string myLevel, string myDept){
@@ -18,7 +18,7 @@ Faculty::Faculty(int myID, string myName, string myLevel, string myDept){
 	dept = myDept;
 
 	numAdvisees = 0;
-	advisees = new int[100];
+	advisees = new int[100]();
 }
 
 Faculty::~Faculty(){
