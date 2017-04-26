@@ -60,6 +60,12 @@ void MasterClass::run()
 					}
 				}
 
+				if(masterSTree.getStudentNode(studentID) == NULL)
+				{
+					cout << "The student ID does not exist in this tree." << endl;
+					break;
+				}
+
 				masterSTree.printStudent(studentID);
 				break;
 			} //Confirmed.
@@ -78,6 +84,11 @@ void MasterClass::run()
 					}
 				}
 				
+				if(masterFTree.getFacultyNode(facultyID) == NULL)
+				{
+					cout << "The faculty ID does not exist in this tree." << endl;
+					break;
+				}
 				masterFTree.printFaculty(facultyID);
 				break;
 			} //Confirmed.
@@ -89,13 +100,18 @@ void MasterClass::run()
 
 				while(cin.fail()){
 					if(cin.fail()){
-						cin.clear();
-						cin.ignore(256, '\n');
+						cin.clear();						cin.ignore(256, '\n');
 						cout << "Invalid input, please enter a valid ID number: ";
 						cin >> studentID;
 					}
 				}
 				
+				if(masterSTree.getStudentNode(studentID) == NULL)
+				{
+					cout << "The student ID does not exist in the tree, unable to look up." << endl;
+					break;
+				}
+
 				int facultyID = masterSTree.getStudentAdvisor(studentID);
 				cout << "Here is the advisor information for this student: " << endl;
 				masterFTree.printFaculty(facultyID);
@@ -116,6 +132,12 @@ void MasterClass::run()
 					}
 				}
 				
+				if(masterFTree.getFacultyNode(facultyID) == NULL)
+				{
+					cout << "The faculty ID does not exist in the tree, unable to look up." << endl;
+					break;
+				}
+
 				int* facultyAdvisees = masterFTree.getFacultyAdvisees(facultyID);
 
 				cout << "Here are the advisees' information for this advisor: " << endl;
@@ -124,6 +146,7 @@ void MasterClass::run()
 				{
 					if(facultyAdvisees[i] != 0)
 					{
+						if(masterSTree.getStudentNode(facultyAdvisees[i]) == NULL) continue;
 						masterSTree.printStudent(facultyAdvisees[i]);						
 					}
 				}
@@ -136,7 +159,7 @@ void MasterClass::run()
 
 				if(masterFTree.getRoot() == NULL)
 				{
-					cout << "Unable to add new student, here are no available advisors." << endl;
+					cout << "Unable to add new student, there are no available advisors." << endl;
 					break;
 				}
 
@@ -171,6 +194,12 @@ void MasterClass::run()
 						cin >> studentID;
 					}
 				}
+
+				if(masterSTree.getStudentNode(studentID) == NULL)
+				{
+					cout << "The student ID does not exist in the tree, unable to look up." << endl;
+					break;
+				}
 				
 				masterFTree.removeAdvisee(masterSTree.getStudentAdvisor(studentID), studentID);
 				masterSTree.deleteStudent(studentID);
@@ -204,8 +233,19 @@ void MasterClass::run()
 						cin >> facultyID;
 					}
 				}
-				
+
+				if(masterFTree.getFacultyNode(facultyID) == NULL)
+				{
+					cout << "The faculty ID does not exist in this tree." << endl;
+					break;
+				}
+
 				int* facultyAdvisees = masterFTree.getFacultyAdvisees(facultyID);
+
+				masterFTree.deleteFaculty(facultyID);
+				cout << "Faculty has been deleted from tree." << endl;
+
+
 
 				for(int i = 0; i < 100; ++i)
 				{
@@ -218,8 +258,7 @@ void MasterClass::run()
 				}
 				cout << "Advisees have been repaired with another advisor." << endl;
 
-				masterFTree.deleteFaculty(facultyID);
-				cout << "Faculty has been deleted from tree." << endl;
+
 
 				break;
 			} //Confirmed.
@@ -240,6 +279,12 @@ void MasterClass::run()
 						cin >> studentID;
 					}
 				}
+
+				if(masterSTree.getStudentNode(studentID) == NULL)
+				{
+					cout << "The student ID does not exist in the tree, unable to look up." << endl;
+					break;
+				}
 				
 				cout << "Enter the new advisor ID: ";
 				cin >> facultyID;
@@ -251,6 +296,12 @@ void MasterClass::run()
 						cout << "Invalid input, please enter a valid ID number: ";
 						cin >> facultyID;
 					}
+				}
+
+				if(masterFTree.getFacultyNode(facultyID) == NULL)
+				{
+					cout << "The faculty ID does not exist in this tree." << endl;
+					break;
 				}
 				
 				masterFTree.removeAdvisee(masterSTree.getStudentAdvisor(studentID), studentID);
@@ -278,6 +329,12 @@ void MasterClass::run()
 						cin >> facultyID;
 					}
 				}
+
+				if(masterFTree.getFacultyNode(facultyID) == NULL)
+				{
+					cout << "The faculty ID does not exist in this tree." << endl;
+					break;
+				}
 				
 				cout << "Enter the student you are removing: ";
 				cin >> studentID;
@@ -289,6 +346,12 @@ void MasterClass::run()
 						cout << "Invalid input, please enter a valid ID number: ";
 						cin >> studentID;
 					}
+				}
+
+				if(masterSTree.getStudentNode(studentID) == NULL)
+				{
+					cout << "The student ID does not exist in the tree, unable to look up." << endl;
+					break;
 				}
 				
 				masterSTree.changeStudentAdvisor(studentID, masterFTree.getRoot()->element.getID());
@@ -306,6 +369,98 @@ void MasterClass::run()
 			}
 			case 14:{
 				keepGoing = false;
+				break;
+			}
+
+			case 15:{
+				string studentName;
+				cout << "Enter the name of the student you wish to find: "; cin.ignore(); getline(cin, studentName);
+
+				masterSTree.searchName(studentName, masterSTree.getRoot());
+				break;
+			}
+
+			case 16:{
+				string facultyName;
+				cout << "Enter the name of the faculty you wish to find: "; cin.ignore(); getline(cin, facultyName);
+
+				masterFTree.searchName(facultyName, masterFTree.getRoot());
+				break;
+			}
+
+			case 17:{
+				int studentID;
+				cout << "Enter the student ID you would like to edit: "; cin >> studentID;
+
+				if(masterSTree.getStudentNode(studentID) == NULL)
+				{
+					cout << "The student ID does not exist in the tree, unable to look up." << endl;
+					break;
+				}
+
+				TreeNode<Student>* node = masterSTree.getStudentNode(studentID);
+
+				int userChoice;
+
+				cout << "1. Change name." << endl
+					<< "2. Change level." << endl
+					<< "3. Change major." << endl
+					<< "4. Change GPA." << endl << endl;
+				cin >> userChoice;
+
+				switch(userChoice)
+				{
+					case 1:{
+						string name;
+						cout << "Enter the student's new name: "; cin.ignore(); getline(cin, name);
+						node->element.setName(name);
+						cout << "The student's name has been changed; here is the student." << endl;
+						node->element.printRecord();
+
+						break;
+					}
+
+					case 2:{
+						string level;
+						cout << "Enter the student's new level: "; cin.ignore(); getline(cin, level);
+						node->element.setLevel(level);
+						cout << "The student's level has been changed; here is the student." << endl;
+						node->element.printRecord();
+
+						break;
+					}
+
+					case 3:{
+						string major;
+						cout << "Enter the student's new major: "; cin.ignore(); getline(cin, major);
+						node->element.setMajor(major);
+						cout << "The student's major has been changed; here is the student." << endl;
+						node->element.printRecord();
+
+						break;
+					}
+
+					case 4:{
+						double gpa;
+						cout << "Enter the student's new GPA: "; cin >> gpa;
+						while(cin.fail() || gpa < 0 || gpa > 4){
+							if(cin.fail()){
+								cin.clear();
+								cin.ignore(256, '\n');
+							}
+							cout << "Invalid input, please enter a valid GPA: ";
+							cin >> gpa;
+						}
+						node->element.setGpa(gpa);
+						cout << "The student's GPA has been changed; here the student." << endl;
+						node->element.printRecord();
+					}
+
+					default:{
+						break;
+					}
+				}
+
 				break;
 			}
 
@@ -373,5 +528,9 @@ void MasterClass::printMenu()
 		<< "11. Change a student's advisor." << endl
 		<< "12. Remove a faculty's advisee." << endl
 		<< "13. Rollback changes." << endl
-		<< "14. Exit." << endl << endl;
+		<< "14. Exit." << endl << endl
+		<< "Extra functions: " << endl
+		<< "15. Search students by name." << endl
+		<< "16. Search faculty by name." << endl
+		<< "17. Change student details." << endl << endl;
 }
