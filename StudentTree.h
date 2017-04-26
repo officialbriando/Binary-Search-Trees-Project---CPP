@@ -29,4 +29,5 @@ class StudentTree
 		void deserializeStudent(string file);
 
 		void printTree(TreeNode<Student> *n);
+		void searchName(string name, TreeNode<Student>* n);
 };
