@@ -108,6 +108,21 @@ void FacultyTree::printFaculty(int k)
 	node->element.printRecord();
 }
 
+void FacultyTree::searchName(string name, TreeNode<Faculty>* n)
+{
+	if(n != NULL)
+	{
+		searchName(name, n->left);
+		if(n->element.getName() == name)
+		{
+			cout << "Student with that name has been found." << endl;
+			n->element.printRecord();
+			return;
+		}
+		searchName(name, n->right);
+	}
+}
+
 void FacultyTree::serializeFaculty(){
 	ofstream outFile("facultyTable.txt");
 	outFile << myTree.getSize() << endl;
