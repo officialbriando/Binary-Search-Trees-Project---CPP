@@ -31,4 +31,5 @@ class FacultyTree
 		void deserializeFaculty(string file);
 
 		void printTree(TreeNode<Faculty> *n);
+		void searchName(string name, TreeNode<Faculty>* n);
 };
